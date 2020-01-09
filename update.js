@@ -1,4 +1,4 @@
-var UPDATE = '9.2.0';
+var UPDATE = '9.3.0';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅<br/>NB: Kalau gagal dipasang ? silahkan hapus dulu aplikasi lamanya';
 var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
 var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
