@@ -1,7 +1,7 @@
 var UPDATE = '9.2.0';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅<br/>NB: Kalau gagal dipasang ? silahkan hapus dulu aplikasi lamanya';
-var UPDATEURL = 'https://firebasestorage.googleapis.com/v0/b/pesan-248ae.appspot.com/o/VideoAnuV'+UPDATE+'.apk?alt=media';
 var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
+var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
 var APPDIR = null;
 if (APPVERSION !== UPDATE){
 	$('.page:first').hide();
