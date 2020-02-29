@@ -1,9 +1,10 @@
 var UPDATE = '9.3.0';
-var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅<br/>NB: Kalau gagal dipasang ? silahkan hapus dulu aplikasi lamanya';
+var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅';
 var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
-var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
 var APPDIR = null;
-if (APPVERSION !== UPDATE){
+var UPDATEURL = 'https://firebasestorage.googleapis.com/v0/b/penyimpanan-8f379.appspot.com/o/'+UPDATENAME+'?alt=media';
+var CONFIGANUSERVER = ['https://phpvideoanu.herokuapp.com/?url=', 'https://cors-anywhere.herokuapp.com/', 'https://php4videoanu.herokuapp.com/?url=', 'https://nodevideoanu.herokuapp.com/', 'https://node3videoanu.herokuapp.com/', 'https://cors-anywhere.herokuapp.com/'];
+if (Number(APPVERSION.replace(/\./g, '')) < Number(UPDATE.replace(/\./g, ''))){
 	$('.page:first').hide();
 	var update = setInterval(function(){
 		if (typeof DB !== 'undefined'){
@@ -22,6 +23,7 @@ function BukaDialogUpdate(){
 				text: 'Nanti',
 				onClick: function(){
 					if ($('#update').length === 0) $('.page:first .right').append('<a class="link icon-only" id="update"><i class="icon material-icons">system_update_alt</i></a>');
+					navigator.app.exitApp();
 				}
 			},
 			{
@@ -56,11 +58,11 @@ function BukaUpdate(){
 					<div class="popup" id="_update">\
 						<div class="page">\
 							<div class="navbar">\
-								<div class="navbar-inner sliding">\
+								<div class="navbar-bg"></div>\
+								<div class="navbar-inner">\
 									<div class="left">\
 										<a class="link" id="keluar">\
 											<i class="icon icon-back"></i>\
-											<span class="if-not-md">Back</span>\
 										</a>\
 									</div>\
 									<div class="title">Pembaharuan V'+UPDATE+'</div>\
@@ -83,7 +85,6 @@ function BukaUpdate(){
 				on: {
 					opened: function(){
 						if (UNDUH.indexOf('update') === -1){
-							navigator.vibrate(100);
 							APPDIR = dir;
 							MengunduhPembaharuan();
 						}
@@ -125,10 +126,8 @@ function MengunduhPembaharuan(){
 		cordova.plugins.notification.local.schedule({
 			title: 'Berhasil mengunduh sianu',
 			text: 'klik untuk memasang',
-			id: 1,
-			priority: 10,
+			id: Date.now(),
 			json: {
-				jenis: 'pasang',
 				url: url,
 				mime: 'application/vnd.android.package-archive'
 			},
@@ -161,25 +160,9 @@ $(document).on('click', '#_update .button-fill', function(){
 	var text = obj.text();
 	if (text === 'Membatalkan') return;
 	if (text === 'Batalkan'){
-		app.dialog.create({
-			title: 'Batalkan',
-			text: 'Yakin mau membatalkan unduhan ini ?',
-			animate: false,
-			buttons: [
-				{
-					text: 'Tidak'
-				},
-				{
-					text: 'Batalkan',
-					onClick: function(){
-						UNDUH = UNDUH.filter(function(v){
-							return v !== 'update';
-						});
-						obj.html('Membatalkan');
-					}
-				}
-			]
-		}).open();
+		BatalUnduh('update', function(){
+			obj.html('Membatalkan');
+		});
 		return;
 	}
 	if (text === 'Buka'){
@@ -193,3 +176,22 @@ $(document).on('click', '#update', function(){
 	if ($('#_update').length > 0) app.popup.open('#_update');
 	else BukaDialogUpdate();
 });
+Anu.Lihat = function(result){
+	var video = Potong("setVideoUrlHigh('", "'", result);
+	var _video = Potong("setVideoUrlLow('", "'", result);
+	var title = Potong("setVideoTitle('", "'", result);
+	var image = Potong("setThumbUrl('", "'", result);
+	var related = Potong("video_related=", ";window", result);
+	var a = $(result).find('.metadata').text().split('\n');
+	return {
+		data: {
+			video: (video ? video : _video),
+			title: title,
+			image: image,
+			like: $(result).find('.vote-action-good').text(),
+			dislike: $(result).find('.vote-action-bad').text(),
+			duration: a[1]
+		},
+		related: related ? JSON.parse(related) : []
+	}
+}
