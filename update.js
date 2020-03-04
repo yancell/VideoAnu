@@ -11,7 +11,10 @@ var CONFIGANUSERVER = [
 	'https://node3videoanu.herokuapp.com/', 
 	'https://cors-anywhere.herokuapp.com/', 
 	'',
-	'https://jsonp.afeld.me/?url=',
+	{
+		url: 'https://jsonp.afeld.me/',
+		uri: '?url='
+	},
 	{
 		url: 'https://www.generateit.net/source-viewer/viewsource.php',
 		data: {
