@@ -1,9 +1,33 @@
-var UPDATE = '9.3.0';
+var UPDATE = '9.3.2';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅';
-var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
+var UPDATENAME = 'VideoAnu.apk';
 var APPDIR = null;
-var UPDATEURL = 'https://firebasestorage.googleapis.com/v0/b/penyimpanan-8f379.appspot.com/o/'+UPDATENAME+'?alt=media';
-var CONFIGANUSERVER = ['https://phpvideoanu.herokuapp.com/?url=', 'https://cors-anywhere.herokuapp.com/', 'https://php4videoanu.herokuapp.com/?url=', 'https://nodevideoanu.herokuapp.com/', 'https://node3videoanu.herokuapp.com/', 'https://cors-anywhere.herokuapp.com/'];
+var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
+var CONFIGANUSERVER = [
+	'https://php5videoanu.herokuapp.com/?url=', 
+	'https://phpvideoanu.herokuapp.com/?url=', 
+	'https://php4videoanu.herokuapp.com/?url=', 
+	'https://nodevideoanu.herokuapp.com/', 
+	'https://node3videoanu.herokuapp.com/', 
+	'https://cors-anywhere.herokuapp.com/', 
+	'',
+	'https://jsonp.afeld.me/?url=',
+	{
+		url: 'https://www.generateit.net/source-viewer/viewsource.php',
+		data: {
+		},
+		uri: 'newURL',
+	},
+	{
+		url: 'https://infohound.net/tidy/tidy.pl?_function=tidy&_html=&_file=&x=15&y=19&alt-text=&doctype=auto&drop-empty-paras=y&fix-backslash=y&fix-bad-comments=y&fix-uri=y&join-styles=y&lower-literals=y&ncr=y&new-blocklevel-tags=&new-empty-tags=&new-inline-tags=&new-pre-tags=&quote-ampersand=y&quote-nbsp=y&indent=no&indent-spaces=2&tab-size=4&wrap=68&wrap-asp=y&wrap-jste=y&wrap-php=y&wrap-sections=y&ascii-chars=y&char-encoding=ascii&input-encoding=latin1&output-bom=auto&output-encoding=ascii&_output=warn',
+		uri: '&_url=',
+		target: '#data'
+	},
+	{
+		url: 'https://images'+~~(Math.random()*33)+'-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none',
+		uri: '&url='
+	}
+];
 if (Number(APPVERSION.replace(/\./g, '')) < Number(UPDATE.replace(/\./g, ''))){
 	$('.page:first').hide();
 	var update = setInterval(function(){
@@ -82,6 +106,7 @@ function BukaUpdate(){
 						</div>\
 					</div>\
 				',
+				animate: false,
 				on: {
 					opened: function(){
 						if (UNDUH.indexOf('update') === -1){
@@ -176,22 +201,3 @@ $(document).on('click', '#update', function(){
 	if ($('#_update').length > 0) app.popup.open('#_update');
 	else BukaDialogUpdate();
 });
-Anu.Lihat = function(result){
-	var video = Potong("setVideoUrlHigh('", "'", result);
-	var _video = Potong("setVideoUrlLow('", "'", result);
-	var title = Potong("setVideoTitle('", "'", result);
-	var image = Potong("setThumbUrl('", "'", result);
-	var related = Potong("video_related=", ";window", result);
-	var a = $(result).find('.metadata').text().split('\n');
-	return {
-		data: {
-			video: (video ? video : _video),
-			title: title,
-			image: image,
-			like: $(result).find('.vote-action-good').text(),
-			dislike: $(result).find('.vote-action-bad').text(),
-			duration: a[1]
-		},
-		related: related ? JSON.parse(related) : []
-	}
-}
