@@ -4,7 +4,7 @@ var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
 var APPDIR = null;
 var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
 if (Number(APPVERSION.replace(/\./g, '')) < Number(UPDATE.replace(/\./g, ''))){
-	$('.page:first').hide();
+	$('.safe-areas .page:first').hide();
 	var update = setInterval(function(){
 		if (typeof DB !== 'undefined'){
 			clearInterval(update);
