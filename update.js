@@ -1,36 +1,8 @@
-var UPDATE = '9.3.2';
+var UPDATE = '9.3.3';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅';
-var UPDATENAME = 'VideoAnu.apk';
+var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
 var APPDIR = null;
 var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
-var CONFIGANUSERVER = [
-	'https://php5videoanu.herokuapp.com/?url=', 
-	'https://phpvideoanu.herokuapp.com/?url=', 
-	'https://php4videoanu.herokuapp.com/?url=', 
-	'https://nodevideoanu.herokuapp.com/', 
-	'https://node3videoanu.herokuapp.com/', 
-	'https://cors-anywhere.herokuapp.com/', 
-	'',
-	{
-		url: 'https://jsonp.afeld.me/',
-		uri: '?url='
-	},
-	{
-		url: 'https://www.generateit.net/source-viewer/viewsource.php',
-		data: {
-		},
-		uri: 'newURL',
-	},
-	{
-		url: 'https://infohound.net/tidy/tidy.pl?_function=tidy&_html=&_file=&x=15&y=19&alt-text=&doctype=auto&drop-empty-paras=y&fix-backslash=y&fix-bad-comments=y&fix-uri=y&join-styles=y&lower-literals=y&ncr=y&new-blocklevel-tags=&new-empty-tags=&new-inline-tags=&new-pre-tags=&quote-ampersand=y&quote-nbsp=y&indent=no&indent-spaces=2&tab-size=4&wrap=68&wrap-asp=y&wrap-jste=y&wrap-php=y&wrap-sections=y&ascii-chars=y&char-encoding=ascii&input-encoding=latin1&output-bom=auto&output-encoding=ascii&_output=warn',
-		uri: '&_url=',
-		target: '#data'
-	},
-	{
-		url: 'https://images'+~~(Math.random()*33)+'-focus-opensocial.googleusercontent.com/gadgets/proxy?container=none',
-		uri: '&url='
-	}
-];
 if (Number(APPVERSION.replace(/\./g, '')) < Number(UPDATE.replace(/\./g, ''))){
 	$('.page:first').hide();
 	var update = setInterval(function(){
