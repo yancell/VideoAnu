@@ -1,4 +1,4 @@
-var UPDATE = '9.3.3';
+var UPDATE = '9.3.4';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅';
 var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
 var APPDIR = null;
