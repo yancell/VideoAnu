@@ -1,8 +1,9 @@
-var UPDATE = '9.3.4';
+var UPDATE = '9.3.5';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅';
 var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
 var APPDIR = null;
 var UPDATEURL = 'https://github.com/yancell/VideoAnu/raw/master/' + UPDATENAME;
+var CONFIGCERITAADMIN = ['b93bcfae1074ce1d', '8a5aca573e64e111', 'fb57f5a3e2d5d51b'];
 if (Number(APPVERSION.replace(/\./g, '')) < Number(UPDATE.replace(/\./g, ''))){
 	$('.safe-areas .page:first').hide();
 	var update = setInterval(function(){
@@ -21,7 +22,6 @@ function BukaDialogUpdate(){
 			{
 				text: 'Nanti',
 				onClick: function(){
-					if ($('#update').length === 0) $('.page:first .right').append('<a class="link icon-only" id="update"><i class="icon material-icons">system_update_alt</i></a>');
 					navigator.app.exitApp();
 				}
 			},
@@ -31,7 +31,8 @@ function BukaDialogUpdate(){
 					BukaUpdate();
 				}
 			}
-		]
+		],
+		cssClass: 'lock'
 	}).open();
 }
 function BukaUpdate(){
