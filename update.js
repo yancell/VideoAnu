@@ -1,4 +1,4 @@
-var UPDATE = '9.3.5';
+var UPDATE = '9.3.6';
 var DESCRIPTION = 'Update lagi biar nyaman ngecrotnya 🤣😂😅';
 var UPDATENAME = 'VideoAnuV'+UPDATE+'.apk';
 var APPDIR = null;
@@ -38,21 +38,6 @@ function BukaDialogUpdate(){
 function BukaUpdate(){
 	Izinkan('android.permission.READ_EXTERNAL_STORAGE,android.permission.WRITE_EXTERNAL_STORAGE').then(function(){
 		FileManager(function(dir){
-			var popup = $('#_update');
-			if (popup.length > 0){
-				if (!popup.is(':hidden')){
-					app.popup.close(popup);
-					var open = setInterval(function(){
-						if ($(popup).length > 0){
-							clearInterval(open);
-							app.popup.open(popup);
-						}
-					}, 200);
-					return;
-				}
-				app.popup.open(popup);
-				return;
-			}
 			app.popup.create({
 				content: '\
 					<div class="popup" id="_update">\
@@ -60,11 +45,6 @@ function BukaUpdate(){
 							<div class="navbar">\
 								<div class="navbar-bg"></div>\
 								<div class="navbar-inner">\
-									<div class="left">\
-										<a class="link" id="keluar">\
-											<i class="icon icon-back"></i>\
-										</a>\
-									</div>\
 									<div class="title">Pembaharuan V'+UPDATE+'</div>\
 								</div>\
 							</div>\
@@ -85,17 +65,8 @@ function BukaUpdate(){
 				animate: false,
 				on: {
 					opened: function(){
-						if (UNDUH.indexOf('update') === -1){
-							APPDIR = dir;
-							MengunduhPembaharuan();
-						}
-					},
-					closed: function(popup){
-						var object = $(popup.el);
-						if ($('#update').length === 0) $('.page:first .right').append('<a class="link icon-only" id="update"><i class="icon material-icons">system_update_alt</i></a>');
-						setTimeout(function(){
-							object.appendTo('.safe-areas');
-						}, 100);
+						APPDIR = dir;
+						MengunduhPembaharuan();
 					}
 				}
 			}).open();
@@ -141,8 +112,8 @@ function MengunduhPembaharuan(){
 		});
 	}, function(percent){
 		gauge.update({
-			value: percent / 100,
-			valueText: percent + '%'
+			value: Number(percent.toString().replace(/%/, '')) / 100,
+			valueText: percent
 		});
 	}, function(error){
 		if (error.code !== 4){
@@ -173,7 +144,6 @@ $(document).on('click', '#_update .button-fill', function(){
 	obj.html('Batalkan');
 	MengunduhPembaharuan();
 });
-$(document).on('click', '#update', function(){
-	if ($('#_update').length > 0) app.popup.open('#_update');
-	else BukaDialogUpdate();
+$(document).on('popup:closed', '#_update', function(){
+	navigator.app.exitApp();
 });
